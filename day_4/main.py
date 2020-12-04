@@ -9,7 +9,6 @@ input_file = "input.txt"
 
 passport_fields = {"byr": None, "iyr": None, "eyr": None, "hgt": None,
                    "hcl": None, "ecl": None, "pid": None}
-optional_fields = {"cid": None}
 
 # Define regex rules
 get_field = re.compile(r'\w+(?=:)')
@@ -35,9 +34,8 @@ with open(input_file) as f:
                 correct_passports += 1
             else:
                 incorrect_passports += 1
-            passport_fields = {"byr": None, "iyr": None, "eyr": None,
-                               "hgt": None, "hcl": None, "ecl": None,
-                               "pid": None}
+            # Clear all values in the dictionary to None
+            passport_fields = dict.fromkeys(passport_fields, None)
         else:
             fields = get_field.findall(line)
             values = get_value.findall(line)
