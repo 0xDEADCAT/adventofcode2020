@@ -3,6 +3,9 @@
 input_file = "input.txt"
 
 max_seat_id = 0
+min_seat_id = 1024
+
+seat_id_list = []
 
 with open(input_file) as f:
     for line in f:
@@ -24,5 +27,14 @@ with open(input_file) as f:
         seat_id = row_min * 8 + col_min
         if seat_id > max_seat_id:
             max_seat_id = seat_id
+        elif seat_id < min_seat_id:
+            min_seat_id = seat_id
+        seat_id_list.append(seat_id)
 
+print(min_seat_id)
 print(max_seat_id)
+
+all_possible_seat_ids = list(range(min_seat_id, max_seat_id))
+missing_seat_ids = list(set(all_possible_seat_ids).difference(seat_id_list))
+
+print(missing_seat_ids)
